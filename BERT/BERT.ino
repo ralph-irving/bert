@@ -67,20 +67,22 @@ void setupDNS() {
   // it will reply with the provided IP to all DNS requests
   // https://github.com/idolpx/mobile-rr
   dnsServer.onQuery ( [] ( const IPAddress & remoteIP, const char *domain, const IPAddress & resolvedIP ) {
+
+      // connectivitycheck.gstatic.com -> 142.251.41.35
       if ( strstr(domain, "connectivitycheck.gstatic.com") )
-        dnsServer.overrideIP =  IPAddress(74, 125, 21, 113);
+        dnsServer.overrideIP =  IPAddress(142, 251, 41, 35);
       
-      // connectivitycheck.android.com -> 74.125.21.113
+      // connectivitycheck.android.com -> 172.217.165.14
       if ( strstr(domain, "connectivitycheck.android.com") )
-        dnsServer.overrideIP =  IPAddress(74, 125, 21, 113);
+        dnsServer.overrideIP =  IPAddress(172, 217, 165, 14);
 
       // dns.msftncsi.com -> 131.107.255.255
       if ( strstr(domain, "msftncsi.com") )
         dnsServer.overrideIP =  IPAddress(131, 107, 255, 255);
 
-      // connectivitycheck.android.com -> 74.125.21.113
+      // connectivitycheck.android.com -> 172.217.165.14
       if ( strstr( "clients1.google.com|clients2.google.com|clients3.google.com|clients4.google.com|connectivitycheck.android.com|connectivitycheck.gstatic.com", domain ) )
-          dnsServer.overrideIP =  IPAddress(74, 125, 21, 113);
+          dnsServer.overrideIP =  IPAddress(172, 217, 165, 14);
   });
 
   dnsServer.setTTL(0);
