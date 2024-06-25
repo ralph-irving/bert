@@ -4,11 +4,12 @@
 #include "RemoteControl.h"
 #include <ESP8266WiFi.h>
 #include <ESP8266mDNS.h>
-#include <ESPAsyncWebServer.h>    // https://github.com/me-no-dev/ESPAsyncWebServer
+#include <ESPAsyncWebServer.h>    // https://github.com/me-no-dev/ESPAsyncWebServer v1.2.4 required.
+                                  // https://github.com/me-no-dev/ESPAsyncTCP v1.2.2 required.
 #include <FS.h>
 #include <SPIFFSEditor.h>
-#include <Servo.h>
-#include "DNSServer.h"            // https://github.com/idolpx/mobile-rr
+#include <Servo.h>                // ESP8266 Boards 2.7.4 required.  PWMRANGE breaking change in 3.x
+#include "DNSServer.h"            // From https://github.com/idolpx/Captive Portalmobile-rr
 
 #define HEARTBEAT_MESSAGE "--heartbeat--"
 #define HTTP_PORT 80
