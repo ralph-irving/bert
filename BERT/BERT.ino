@@ -6,6 +6,7 @@
 #include <ESP8266mDNS.h>
 #include <ESPAsyncWebServer.h>    // https://github.com/me-no-dev/ESPAsyncWebServer v1.2.4 required.
                                   // https://github.com/me-no-dev/ESPAsyncTCP v1.2.2 required.
+#include <ESPAsyncHTTPUpdateServer.h> // https://github.com/IPdotSetAF/ESPAsyncHTTPUpdateServer v1.1.0 required.
 #include <FS.h>
 #include <SPIFFSEditor.h>
 #include <Servo.h>                // ESP8266 Boards 2.7.4 required.  PWMRANGE breaking change in 3.x
@@ -32,6 +33,8 @@ DNSServer dnsServer;                    // create DNS Server instance
 AsyncWebServer webServer(HTTP_PORT);    // create webserver instance
 AsyncWebSocket ws("/ws");               // create websocket instance
 AsyncWebSocketClient *_activeClient;    // websocket client instance
+
+ESPAsyncHTTPUpdateServer updateServer;
 
 String macToString(int val) {
   String name="";
@@ -121,6 +124,9 @@ void setupWebServer() {
     // attach WebSocket interface
     ws.onEvent(onWSEvent);
     webServer.addHandler(&ws);
+
+    // require credentials for updateServer
+    updateServer.setup(&webServer, "admin", "BERT");
 
     webServer.begin();
 }
